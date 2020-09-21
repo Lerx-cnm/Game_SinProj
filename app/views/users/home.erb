@@ -1,0 +1,8 @@
+<h1>Welcome to your game library, <%@user=User.find_by(user_id: session[:user_id])%><%=@user[:name]%></h1>
+
+<h2>please check below if you would to enter a new game or see stored games</h2>
+<a href="/games/new">Enter a new game</a>
+<a href="/users/games">See stored games</a>
+<br/>
+<br/>
+<a href="/users/logout">Logout</a>
