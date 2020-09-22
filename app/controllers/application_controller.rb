@@ -96,4 +96,10 @@ class ApplicationController < Sinatra::Base
 
     erb :'/users/games'
   end
+  get '/games/delete/:name/:genre/:price' do
+    current_user
+    @delete = Game.find_by(name: params[:name], genre: params[:genre], price: params[:price], user_id: @current_user.id)
+    @delete.destroy
+    redirect '/users/games'
+  end
 end

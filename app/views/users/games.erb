@@ -1,3 +1,4 @@
+<link rel='stylesheet' href='/stylesheets/mycss.css'/>
  <h1>This is the list of all user submitted games! </h1>
 <p>
 <%error = "Your list seems to be empty"%>
@@ -5,14 +6,15 @@
 <%=error if @games == []%>
 </p>
 <% @games.each do |game|%>
-   <p><b>Title: </b> <%= game.name%>
-   <b>Genre: </b> <%= game.genre%>
-   <b>Value: </b> $<%= game.price%></b>
+   <p><b>Title: </b> <%= name = game.name%>
+   <b>Genre: </b> <%= genre = game.genre%>
+   <b>Value: </b> $<%= price = game.price%> 
+<a href='/games/delete/<%=name%>/<%=genre%>/<%=price%>' class = 'greenButton'>Delete</a>
 <% end %><br/>
 <br/>
-<a href="/games/new"><button>Add New Game(s)</button></a>
+<a href="/games/new" class='mybutton'>Add New Game(s)</a>
 
 <div class="footer">
-    <a href="/users/logout">Logout</a>
+    <a href="/users/logout" class="mybutton">Logout</a>
     <small>&copy; 2020 <strong>GameLocker</strong></small>
 </footer>
