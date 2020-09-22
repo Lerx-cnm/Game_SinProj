@@ -1,9 +1,8 @@
+<link rel='stylesheet' href='/stylesheets/mycss.css'>
+<h1>Welcome to your game wishlist, <%=@user.name%>!</h1>
 
-<h1>Welcome to your game library, <%=@user.name%></h1>
-
-<h2>please check below if you would to enter a new game or see stored games</h2>
-<a href="/games/new"><button type="button">Enter a new game</button></a>
-<a href="/users/games"><button type="button">See stored games</button></a>
+<h2>See buttons below to Enter a game, or see already entered ones!</h2>
+<a href="/games/new"><button type="button" class='mybutton'>Enter a new game</button></a>
+<a href="/users/games"><button type="button" class='mybutton'>See stored games</button></a>
 <br/>
 <br/>
-<a href="/users/logout">Logout</a>

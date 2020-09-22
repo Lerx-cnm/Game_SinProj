@@ -57,6 +57,7 @@ class ApplicationController < Sinatra::Base
     redirect '/'
   end
   get '/users/home' do
+    redirect '/' if !logged_in?
     @user = User.find(session[:user_id])
     erb :'/users/home'
   end
@@ -79,7 +80,7 @@ class ApplicationController < Sinatra::Base
   end
   helpers do
     def logged_in?
-      !!current_user
+      session[:user_id]
     end
     def current_user
       @current_user = User.find(session[:user_id])
