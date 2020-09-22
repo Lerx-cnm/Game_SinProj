@@ -22,12 +22,16 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/registration' do
+    if User.find_by(email: params[:email])
+      redirect '/'
+    else
     @user = User.new(name: params[:name], email: params[:email], password_digest: params[:password])
     # binding.pry
     @user.save
     session[:user_id] = @user.id
 
     redirect '/users/home'
+    end
   end
 
   post '/sessions' do
@@ -70,7 +74,7 @@ class ApplicationController < Sinatra::Base
     # binding.pry
     @game = Game.new(name: params[:name], genre: params[:genre], price: params[:price], user_id: @user.id)
     @game.save
-    binding.pry
+    # binding.pry
     redirect '/games/new'
   end
   helpers do
@@ -78,10 +82,18 @@ class ApplicationController < Sinatra::Base
       !!current_user
     end
     def current_user
-      @current_user ||= User.find_by(id:session[:user_id]) if session[:user_id]
+      @current_user = User.find(session[:user_id])
     end
     def logout 
       session.clear
     end
+  end
+  get '/users/games' do
+    current_user 
+    # binding.pry
+    @games = Game.where(user_id: @current_user.id)
+    # binding.pry
+
+    erb :'/users/games'
   end
 end

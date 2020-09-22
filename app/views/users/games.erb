@@ -1,0 +1,18 @@
+ <h1>This is the list of all user submitted games! </h1>
+<p>
+<%error = "Your list seems to be empty"%>
+<%#binding.pry%>
+<%=error if @games == []%>
+</p>
+<% @games.each do |game|%>
+   <p><b>Title: </b> <%= game.name%>
+   <b>Genre: </b> <%= game.genre%>
+   <b>Value: </b> $<%= game.price%></b>
+<% end %><br/>
+<br/>
+<a href="/games/new"><button>Add New Game(s)</button></a>
+
+<div class="footer">
+    <a href="/users/logout">Logout</a>
+    <small>&copy; 2020 <strong>GameLocker</strong></small>
+</footer>
