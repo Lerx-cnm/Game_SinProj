@@ -1,6 +1,7 @@
 <link rel='stylesheet' href='/stylesheets/mycss.css'>
 <h1>Please login below:</h1>
-<form action='/sessions' method="POST">
+<p><%=@error%></p>
+<form action='/login' method="POST">
   <label>Email:</label>
   <br/>
   <input type="text" name="email">
