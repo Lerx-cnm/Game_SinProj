@@ -1,0 +1,9 @@
+<form action='/games/update/<%=@game.id%>' method='POST'>
+<label>Name:</label><br/>
+<input type="text" name="name" value = "<%=@game.name%>"><br/>
+<label>Genre:</label><br/>
+<input type="text" name="genre" value = "<%=@game.genre%>"><br/>
+<label>Price:</label><br/>
+<input type="integer" name="price" value = "<%=@game.price%>"><br/><br/>
+<input type="submit" class = 'mybutton'><br/>
+</form>

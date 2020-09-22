@@ -14,11 +14,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :login
+    erb :'/session/login'
   end
 
   get '/signup' do
-    erb :signup
+    erb :'/session/signup'
   end
 
   post '/registration' do
@@ -53,7 +53,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/users/logout' do
-    session.clear
+    logout
     redirect '/'
   end
   get '/users/home' do
@@ -78,6 +78,17 @@ class ApplicationController < Sinatra::Base
     # binding.pry
     redirect '/games/new'
   end
+  get '/games/:id/edit' do
+    @game = Game.find(params[:id])
+    erb :'/games/edit'
+  end
+
+  # patch '/games/:id' do
+  #   game = Game.find(param[:id])
+  #   game.update(params[:game])
+  #   redirect '/game/#{params[:id]}'
+  # end
+
   helpers do
     def logged_in?
       session[:user_id]
@@ -97,9 +108,21 @@ class ApplicationController < Sinatra::Base
 
     erb :'/users/games'
   end
-  get '/games/delete/:name/:genre/:price' do
+  get '/games/update/:id' do
+    @game = Game.find(params[:id])
+    erb :'/games/edit'
+  end
+  post '/games/update/:id' do
+    @id = Game.find_by(id: params[:id])
+    @id.update(name: params[:name], genre: params[:genre], price: params[:price])
+
+    binding.pry
+    @id.save
+    redirect '/users/games'
+  end
+  get '/games/delete/:id' do
     current_user
-    @delete = Game.find_by(name: params[:name], genre: params[:genre], price: params[:price], user_id: @current_user.id)
+    @delete = Game.find_by(id: params[:id])
     @delete.destroy
     redirect '/users/games'
   end

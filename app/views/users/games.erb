@@ -1,5 +1,5 @@
 <link rel='stylesheet' href='/stylesheets/mycss.css'/>
- <h1>This is the list of all user submitted games! </h1>
+ <h1>This is the list of all the games you have stored.</h1>
 <p>
 <%error = "Your list seems to be empty"%>
 <%#binding.pry%>
@@ -8,8 +8,9 @@
 <% @games.each do |game|%>
    <p><b>Title: </b> <%= name = game.name%>
    <b>Genre: </b> <%= genre = game.genre%>
-   <b>Value: </b> $<%= price = game.price%> 
-<a href='/games/delete/<%=name%>/<%=genre%>/<%=price%>' class = 'greenButton'>Delete</a>
+   <b>Value: </b> <%= price = game.price%> 
+   <a href='/games/update/<%=game.id%>' class='greenButton'>Edit</a>
+<a href='/games/delete/<%=game.id%>' class = 'greenButton'>Delete</a>
 <% end %><br/>
 <br/>
 <a href="/games/new" class='mybutton'>Add New Game(s)</a>
