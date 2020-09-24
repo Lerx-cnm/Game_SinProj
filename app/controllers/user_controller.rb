@@ -3,16 +3,19 @@ class UserController < ApplicationController
         erb :'/session/signup'
       end
       
-      post '/registration' do
+      post '/signup' do
         if User.find_by(email: params[:email])
-          redirect '/'
-        else
+          redirect '/login'
+        elsif params[:name] != "" && params[:email] != "" && params[:password] != ""
         @user = User.new(name: params[:name], email: params[:email], password: params[:password])
         # binding.pry
         @user.save
         session[:user_id] = @user.id
     
         redirect '/users/home'
+        else
+          @error = "*Please make sure all fields are filled in and valid*"
+          erb :'/session/signup'
         end
       end
       

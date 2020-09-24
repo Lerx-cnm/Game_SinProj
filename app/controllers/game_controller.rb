@@ -1,15 +1,24 @@
 class GameController < ApplicationController 
     get '/games/new' do
+        if logged_in?
         erb :'/games/new'
+        else 
+            redirect '/login'
+        end
       end
     
     post '/games/new' do
-        @user = User.find(session[:user_id])
         # binding.pry
-        @game = Game.new(name: params[:name], genre: params[:genre], price: params[:price], user_id: @user.id)
+        if params[:name] != "" && params[:genre] != "" && params[:price] != ""
+            binding.pry
+        @game = Game.new(name: params[:name], genre: params[:genre],price:  params[:price], user_id: current_user.id)
         @game.save
         # binding.pry
         redirect '/games/new'
+        else
+            @error = "*Please make sure all fields are filled in*"
+            erb :'/games/new'
+        end
     end
 
     get '/games' do
@@ -25,7 +34,7 @@ class GameController < ApplicationController
 
     get '/games/:id/edit' do
         # binding.pry
-        @games = Game.find_by(params[:id])
+        @games = Game.find_by(id: params[:id])
         # binding.pry
         if logged_in? && @games.user_id == session[:user_id]
         # binding.pry
@@ -37,8 +46,8 @@ class GameController < ApplicationController
 
     patch '/games/:id/edit' do
         @games = Game.find_by(id: params[:id])
-        binding.pry
-        if logged_in? && @game.user_id == session[:user_id]
+        # binding.pry
+        if logged_in? && @games.user_id == session[:user_id]
           @games.update(name: params[:name], genre: params[:genre], price: params[:price])
           @games.save
           redirect '/games'

@@ -10,11 +10,6 @@
    <p><b>Title: </b> <%= name = game.name%>
    <b>Genre: </b> <%= genre = game.genre%>
    <b>Value: </b> <%= price = game.price%> 
-   <!--
-   <form method="post" action="games/<%=game.id%>/edit">
-   <input id="hidden" type="hidden" name="_method" value="edit">
-   <input type= "Submit" value="Edit" class="greenButton">
-   </form> -->
    <a href= '/games/<%=game.id%>/edit'>Edit</a>
   <form method="post" action="/games/<%=game.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">

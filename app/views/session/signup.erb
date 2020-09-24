@@ -1,6 +1,7 @@
 <link rel='stylesheet' href='/stylesheets/mycss.css'>
 <h1> Please enter credentials below:</h1>
-<form action="/registration" method="POST">
+<p style="color:red"><%=@error%></p>
+<form action="/signup" method="POST">
   <label>Name:</label>
   <br/>
   <input type="text" name="name">

@@ -1,6 +1,6 @@
 <link rel='stylesheet' href='/stylesheets/mycss.css'/>
 <h1>Hello there! This is where you can enter in a new game to be stored</h1>
-
+<p style="color:red"><%=@error%></p>
 <form action='/games/new' method='POST'>
 <label>Name:</label><br/>
 <input type="text" name="name"><br/>
