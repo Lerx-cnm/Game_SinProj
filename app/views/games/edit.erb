@@ -1,9 +1,10 @@
-<form action='/games/update/<%=@game.id%>' method='POST'>
+<form action='/games/<%=@games.id%>/edit' method='POST'>
+<input id='hidden' type ='hidden' name='_method' value='patch' />
 <label>Name:</label><br/>
-<input type="text" name="name" value = "<%=@game.name%>"><br/>
+<input type="text" name="name" value = "<%=@games.name%>"><br/>
 <label>Genre:</label><br/>
-<input type="text" name="genre" value = "<%=@game.genre%>"><br/>
+<input type="text" name="genre" value = "<%=@games.genre%>"><br/>
 <label>Price:</label><br/>
-<input type="integer" name="price" value = "<%=@game.price%>"><br/><br/>
+<input type="integer" name="price" value = "<%=@games.price%>"><br/><br/>
 <input type="submit" class = 'mybutton'><br/>
 </form>

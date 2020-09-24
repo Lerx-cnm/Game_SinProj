@@ -7,7 +7,7 @@ class UserController < ApplicationController
         if User.find_by(email: params[:email])
           redirect '/'
         else
-        @user = User.new(name: params[:name], email: params[:email], password_digest: params[:password])
+        @user = User.new(name: params[:name], email: params[:email], password: params[:password])
         # binding.pry
         @user.save
         session[:user_id] = @user.id
@@ -18,7 +18,7 @@ class UserController < ApplicationController
       
       get '/users/home' do
         redirect '/' if !logged_in?
-        @user = User.find(session[:user_id])
+        @user = User.find_by(id: session[:user_id])
         erb :'/users/home'
       end
 end

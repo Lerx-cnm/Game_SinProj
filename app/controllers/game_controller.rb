@@ -12,33 +12,49 @@ class GameController < ApplicationController
         redirect '/games/new'
     end
 
-    get '/users/games' do
-        current_user 
+    get '/games' do
         # binding.pry
-        @games = Game.where(user_id: @current_user.id)
-        # binding.pry
-    
+        if logged_in? && current_user.id == session[:user_id]
+          @games = Game.where(user_id: @current_user.id)
+        # binding.pry 
         erb :'/users/games'
+        else
+            redirect '/login'
+        end
     end
 
-    get '/games/update/:id' do
-        @game = Game.find(params[:id])
-        erb :'/games/edit'
-    end
-
-    post '/games/update/:id' do
-        @id = Game.find_by(id: params[:id])
-        @id.update(name: params[:name], genre: params[:genre], price: params[:price])
-    
+    get '/games/:id/edit' do
         # binding.pry
-        @id.save
-        redirect '/users/games'
+        @games = Game.find_by(params[:id])
+        # binding.pry
+        if logged_in? && @games.user_id == session[:user_id]
+        # binding.pry
+        erb :'/games/edit'
+        else 
+            redirect '/login'
+        end
     end
 
-    get '/games/delete/:id' do
-        current_user
-        @delete = Game.find_by(id: params[:id])
-        @delete.destroy
-        redirect '/users/games'
+    patch '/games/:id/edit' do
+        @games = Game.find_by(id: params[:id])
+        binding.pry
+        if logged_in? && @game.user_id == session[:user_id]
+          @games.update(name: params[:name], genre: params[:genre], price: params[:price])
+          @games.save
+          redirect '/games'
+        else 
+          redirect '/login'
+        end
+    end
+
+    delete '/games/:id/delete' do
+        @game = Game.find_by(id: params[:id])
+        # binding.pry
+        if logged_in? && @game.user_id == session[:user_id]
+        @game.destroy
+        redirect '/games'
+        else
+            redirect '/login'
+        end
     end
 end

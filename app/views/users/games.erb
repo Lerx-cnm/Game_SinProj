@@ -1,6 +1,7 @@
 <link rel='stylesheet' href='/stylesheets/mycss.css'/>
  <h1>This is the list of all the games you have stored.</h1>
 <p>
+<p style=color:red'><%=@error%></p>
 <%error = "Your list seems to be empty"%>
 <%#binding.pry%>
 <%=error if @games == []%>
@@ -9,8 +10,16 @@
    <p><b>Title: </b> <%= name = game.name%>
    <b>Genre: </b> <%= genre = game.genre%>
    <b>Value: </b> <%= price = game.price%> 
-   <a href='/games/update/<%=game.id%>' class='greenButton'>Edit</a>
-<a href='/games/delete/<%=game.id%>' class = 'greenButton'>Delete</a>
+   <!--
+   <form method="post" action="games/<%=game.id%>/edit">
+   <input id="hidden" type="hidden" name="_method" value="edit">
+   <input type= "Submit" value="Edit" class="greenButton">
+   </form> -->
+   <a href= '/games/<%=game.id%>/edit'>Edit</a>
+  <form method="post" action="/games/<%=game.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete" class="greenButton">
+</form> 
 <% end %><br/>
 <br/>
 <a href="/games/new" class='mybutton'>Add New Game(s)</a>

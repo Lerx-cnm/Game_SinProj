@@ -4,17 +4,16 @@ class SessionController < ApplicationController
       end
       
       post '/login' do
-        @user = User.find_by(email: params[:email], password_digest: params[:password])
-        if !@user 
-            # @error = "Please make sure all fields are filled in and correct."
-            # binding.pry
-            redirect '/login'
-        elsif @user
+        @user = User.find_by(email: params[:email])
+        # binding.pry
+        if @user && @user.authenticate(params[:password])
           session[:user_id] = @user.id
-          redirect '/users/home'
+          # binding.pry
+            redirect '/users/home'
+        else 
+          @error = "*Please make sure credentials are filled in and valid*"
+          erb :'/session/login'
         end
-    #     @error = "Please make sure all fields are filled in and correct."
-    #   redirect '/login'
       end
 
       get '/logout' do
