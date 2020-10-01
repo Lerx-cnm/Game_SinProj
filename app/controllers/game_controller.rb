@@ -1,7 +1,6 @@
 class GameController < ApplicationController
      #This is my 'new' RESTful route
     get '/games/new' do
-    end
         if logged_in?
         erb :'/games/new'
         else 
@@ -11,7 +10,6 @@ class GameController < ApplicationController
     
     post '/games/new' do
         if params[:name] != "" && params[:genre] != "" && params[:price] != ""
-            binding.pry
         @game = Game.new(name: params[:name], genre: params[:genre],price:  params[:price], user_id: current_user.id)
         @game.save
         redirect '/games/new'
@@ -39,6 +37,7 @@ class GameController < ApplicationController
         end
     end
     patch '/games/:id/edit' do
+        # Only need to check logged_in in the 'get'
         @games = Game.find_by(id: params[:id])
         if logged_in? && @games.user_id == session[:user_id]
           @games.update(name: params[:name], genre: params[:genre], price: params[:price])

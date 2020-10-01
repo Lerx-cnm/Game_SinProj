@@ -3,7 +3,6 @@
 <p>
 <p style=color:red'><%=@error%></p>
 <%error = "Your list seems to be empty"%>
-<%#binding.pry%>
 <%=error if @games == []%>
 </p>
 <% @games.each do |game|%>
