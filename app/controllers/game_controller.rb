@@ -18,6 +18,7 @@ class GameController < ApplicationController
             erb :'/games/new'
         end
     end
+    
     #/games is my 'index' RESTful route
     get '/games' do
         if logged_in? && current_user.id == session[:user_id]

@@ -9,7 +9,7 @@
    <p><b>Title: </b> <%= name = game.name%>
    <b>Genre: </b> <%= genre = game.genre%>
    <b>Value: </b> <%= price = game.price%> 
-   <a href= '/games/<%=game.id%>/edit'>Edit</a>
+   <a href= '/games/<%=game.id%>/edit' class= 'greenButton'>Edit</a>
   <form method="post" action="/games/<%=game.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete" class="greenButton">
